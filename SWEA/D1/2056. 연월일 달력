@@ -1,0 +1,41 @@
+//조금 더 효율적으로 코딩 할 수 없을까?
+
+Scanner sc = new Scanner(System.in);
+		int T;
+		T = sc.nextInt();
+		String [] result = new String[T];
+		
+		for(int i=0; i<T; i++) {
+			String input = sc.next();
+			int temp = Integer.parseInt(input);
+			
+			int day = temp%100;
+			int month = temp%10000/100;
+			
+			if(day > 0 && day <= 31 && month > 0 && month <= 12) {
+				if(month == 2) {
+					if(day <= 28) {
+						result[i] =input.substring(0,4)+"/"+input.substring(4,6)+"/"+input.substring(6);
+					}
+					else
+						result[i] = "-1";
+				}
+				else if(month==4 || month==6 || month==9 || month==11) {
+					if(day <= 30) {
+						result[i] =input.substring(0,4)+"/"+input.substring(4,6)+"/"+input.substring(6);
+						}
+					else
+						result[i] = "-1";
+				}
+				else{
+					if(day <= 31) {
+						result[i] =input.substring(0,4)+"/"+input.substring(4,6)+"/"+input.substring(6);
+					}
+					else
+						result[i] = "-1";
+				}
+			}
+			else
+				result[i] = "-1";
+		}
+		for(int i=0; i<T; i++) System.out.println("#"+(i+1)+" "+result[i]);

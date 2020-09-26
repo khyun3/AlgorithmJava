@@ -1,0 +1,40 @@
+	//그냥 정렬해버리고 최대값 출력한 코드
+	Scanner sc = new Scanner(System.in);
+		int T;
+		T = sc.nextInt();
+		int [] input = new int[10];
+		int [] result = new int[T];
+		
+		for(int i=0; i<T; i++) {
+			for(int j=0; j<10; j++) {
+				input[j] = sc.nextInt();
+			}
+			Arrays.sort(input);
+			result[i]=input[9];
+		}
+		for(int i=0; i<T; i++) { 
+			System.out.println("#" + (i+1) + " " + result[i]);
+		}
+		
+		
+		
+		
+		//왜 틀린거지? 이유를 모르겠네;;
+		Scanner sc = new Scanner(System.in);
+		int T, temp_next=0,temp=0;
+		T = sc.nextInt();
+		int [] result = new int[T];
+		
+		for(int i=0; i<T; i++) {
+			for(int j=0; j<10; j++) {
+				temp_next = sc.nextInt();
+				if(temp < temp_next) {
+					result[i] = temp_next;
+					temp = temp_next;
+				}
+			}
+			temp_next=0; temp=0;
+		}
+		for(int i=0; i<T; i++) { 
+			System.out.println("#"+(i+1)+" " + result[i]);
+		}

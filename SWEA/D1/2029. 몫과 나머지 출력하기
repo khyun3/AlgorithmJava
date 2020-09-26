@@ -1,0 +1,12 @@
+		Scanner sc = new Scanner(System.in);
+		int T, a,b;
+		T=sc.nextInt();
+		int [][] result = new int[T][2];
+		for(int i=0; i<T; i++) {
+			a = sc.nextInt();
+			b = sc.nextInt();
+			result[i][0] = a/b;
+			result[i][1] = a%b;
+		}
+		for(int i=0; i<T; i++)
+			System.out.println("#"+(i+1)+" "+result[i][0] + " " + result[i][1]);

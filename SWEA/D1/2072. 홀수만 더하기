@@ -1,0 +1,20 @@
+		Scanner sc = new Scanner(System.in);
+		int inputSize = 10;
+		int testCase;
+		int temp;
+		
+		testCase = sc.nextInt();
+		int [] result = new int[testCase];
+		
+		for(int i=0; i<testCase; i++)
+			for(int j=0; j<inputSize; j++){
+				temp = sc.nextInt();
+			
+				if(temp%2 != 0) {
+					result[i] += temp;
+				}
+			}
+		
+		for(int i=0; i<testCase; i++){
+			System.out.println("#"+(i+1)+' '+ result[i]);
+		}
