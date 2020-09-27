@@ -41,7 +41,7 @@ public class BOJ_17218_비밀번호만들기 {
 				if(D[r+1][c] >= D[r][c+1]) { //왼쪽값이 위쪽 값과 같거나 더 크면 왼쪽으로 이동
 					c-=1;
 				}
-				else if(D[r+1][c] < D[r][c+1]){
+				else if(D[r+1][c] < D[r][c+1]){ //위쪽값이 더 크면 위로 이동
 					r-=1;
 				}
 			}
@@ -65,11 +65,10 @@ public class BOJ_17218_비밀번호만들기 {
 					D[i][j] = Math.max(D[i-1][j], D[i][j-1]); //위,왼쪽 값
 				}
 				//출력해보기
-				//print();
+				print();
 			}
 		}
 	}
-
 	static void print() {
 		System.out.println();
 		System.out.print("    ");
