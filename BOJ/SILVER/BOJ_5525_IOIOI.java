@@ -2,8 +2,10 @@ package SILVER;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class BOJ_5525_IOIOI {
 	public static void main(String[] args) throws Exception {
@@ -13,32 +15,43 @@ public class BOJ_5525_IOIOI {
 		int S = Integer.parseInt(br.readLine());
 		char [] str = br.readLine().toCharArray();
 
-		//홀수 3,5,7,9, ...
-		N = 2*N+1;
-		int k=0;
-		int cnt = 0;
-		boolean flag = true;
-		Deque<Character> dque = new LinkedList<>();
+		int k = 2*N+1;
+		int answer = 0;
 		
-		while(true) {
-			
-			char c = str[k++];
-			if(dque.isEmpty() && c=='I') { //I로 시작해야함
-				dque.offer(c);
-			}
-			else if(dque.peekLast()=='O' && c=='I') {
-				dque.offer(c);
-			}
-			else if(dque.peekLast()=='C' && c=='O') {
-				dque.offer(c);
+		Deque<Character> que = new LinkedList<>();
+		for (int i = 0; i < str.length; i++) {
+			char c = str[i];
+					
+			if(que.isEmpty()) {
+				if(c=='I')
+					que.offer(c);
 			}
 			else {
-				dque.clear();
+				if(que.peekLast()=='I' && c=='O') {
+					que.offer(c);
+				}
+				else if(que.peekLast()=='O' && c=='I') {
+					que.offer(c);
+				}
+				else if(que.peekLast()=='I' && c=='I') {
+					int tmp = (que.size()-1)/2-(N-1);
+					if(tmp > 0)
+						answer+=tmp;
+					que.clear();
+					que.offer(c);
+				}
+				else {
+					int tmp = (que.size()-1)/2-(N-1);
+					if(tmp > 0)
+						answer+=tmp;
+					que.clear();
+				}
 			}
 			
-			System.out.println(dque);
-			if(k==S) return;
 		}
-		
+		int tmp = (que.size()-1)/2-(N-1);
+		if(tmp > 0)
+			answer+=tmp;
+		System.out.println(answer);
 	}
 }
