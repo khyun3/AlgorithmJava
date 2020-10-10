@@ -2,10 +2,8 @@ package SILVER;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class BOJ_5525_IOIOI {
 	public static void main(String[] args) throws Exception {
