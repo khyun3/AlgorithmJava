@@ -32,7 +32,9 @@ public class BOJ_1654_랜선자르기 {
 			lanCnt = 0;
 			mid = (last+first)/2;
 			
+			if(mid==0) return 1;
 			for (int i = 0; i < lan.length; i++) {
+				
 				lanCnt += lan[i]/mid;
 			}
 		
@@ -43,6 +45,6 @@ public class BOJ_1654_랜선자르기 {
 				last = mid - 1;
 			}
 		}
-		return mid;
+		return last;
 	}
 }
