@@ -13,8 +13,7 @@ public class BOJ_18310_안테나 {
 		int [] houses = new int [2000001];
 		int max = 0;
 		int min = Integer.MAX_VALUE;
-		int mid = 0;
-		
+		long dist = 0;
 		StringTokenizer st = new StringTokenizer(br.readLine()," ");
 		
 		while(st.hasMoreTokens()) {
@@ -23,33 +22,39 @@ public class BOJ_18310_안테나 {
 			max = Math.max(max, tmp);
 			min = Math.min(min, tmp);
 		}
-		print(houses);
 		
-		mid = (max+min)/2;
+		//가장 앞에있는 집에 설치했을 때
+		for (int i = min; i <= max; i++) {
+			dist += houses[i]*(i-1);
+		}
 		
-		//오른쪽
-		while(true) {
-			
-		}
-		//왼쪽
-		while(true) {
-			
-		}
+		System.out.println(search(houses, N, min, max, dist));
 	}
-
-	private static void print(int [] a) {
-		for (int i = 0; i < a.length; i++) {
-			if(a[i] !=0) {
-				System.out.print(i+" ");
+	private static int search(int[] houses, int N, int min, int max, long dist) {
+		int answer = min;
+		int bMin = min;
+		int leftCnt = houses[min]; //오른쪽 개수
+		int rightCnt = N-leftCnt;  //왼쪽 개수
+		long distTmp = dist;
+		int i = 0;
+		
+		for (i = min+1; i <= max; i++) {
+			//집이 있는 위치로 이동하자
+			if(houses[i] != 0) {
+				distTmp = dist - (i-bMin)*rightCnt + (i-bMin)*leftCnt;
+			
+				bMin = i;
+				rightCnt -= houses[i];
+				leftCnt += houses[i];
+				if(dist>distTmp) {
+					dist = distTmp;
+					answer = i;
+				}
+				else {
+					return answer;
+				}
 			}
 		}
-		System.out.println();
-		for (int i = 0; i < a.length; i++) {
-			if(a[i] !=0) {
-				System.out.print(a[i]+" ");
-			}
-		}
-		System.out.println();
-
+		return answer;
 	}
 }
