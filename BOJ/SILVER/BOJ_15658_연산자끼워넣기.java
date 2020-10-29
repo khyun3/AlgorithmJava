@@ -2,24 +2,18 @@ package SILVER;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class BOJ_15658_연산자끼워넣기 {
-	static int tot = 0;
-	static int min=Integer.MAX_VALUE, max=0;
+	static int min=Integer.MAX_VALUE, max=-Integer.MAX_VALUE;
 	static int [] num;
-	static List<Character> op;
-	static boolean [] selected;
+	static int [] oper = new int [4];
 	public static void main(String[] args)throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
 		
 		num = new int [N];
-		op = new ArrayList<>();
 		
 		//숫자 입력
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -29,62 +23,31 @@ public class BOJ_15658_연산자끼워넣기 {
 		
 		// 연산자 입력
 		st = new StringTokenizer(br.readLine());
-		int R = 0;
 		for (int i = 0; i < 4; i++) {
-			int tmp = Integer.parseInt(st.nextToken());
-			R +=tmp;
-			for (int j = 0; j < tmp; j++) {
-				if(i==0)
-					op.add('+');
-				else if(i==1)
-					op.add('-');
-				else if(i==2)
-					op.add('*');
-				else
-					op.add('/');
-			}
-			
-		}//연산자 입력 끝
-
-		selected = new boolean[R];
-		nPr(0, R, N-1, new char [N-1]);
+			oper[i] = Integer.parseInt(st.nextToken());
+		}
+		//연산자 입력 끝
+		nPr(1, 0, 0, 0, 0, num[0], N);
 		System.out.println(max+"\n"+min);
 	}
-
-	private static void nPr(int cnt, int n, int r, char [] arr) {
-		if(cnt==r) {
-			tot++;
-			int sum = num[0];
-			
-			for (int i = 0; i < r; i++) {
-				switch(arr[i]) {
-				case '+':
-					sum +=num[i+1];
-					break;
-				case '-':
-					sum -=num[i+1];
-					break;
-				case '*':
-					sum *=num[i+1];
-					break;
-				case '/':
-					sum /=num[i+1];
-					break;
-				}
-			}
-			min = Math.min(min, sum);
-			max = Math.max(max, sum);
-			System.out.println(Arrays.toString(arr) +" "+ tot +"  "+ min+"  "+ max);
+	private static void nPr(int cnt, int plus, int minus, int mul, int div, int cal, int n) {
+		
+		if(n==cnt) {
+			min = Math.min(min, cal);
+			max = Math.max(max, cal);
 			return;
 		}
-		
-		for (int i = 0; i < n; i++) {
-			if(selected[i]) continue;
-			
-			arr[cnt] = op.get(i);
-			selected[i] = true;
-			nPr(cnt+1, n, r, arr);
-			selected[i] = false;
+		if(plus<oper[0]) {
+			nPr(cnt+1, plus+1, minus, mul, div, cal+num[cnt], n);
+		}		
+		if(minus<oper[1]) {
+			nPr(cnt+1, plus, minus+1, mul, div, cal-num[cnt], n);
+		}
+		if(mul<oper[2]) {
+			nPr(cnt+1, plus, minus, mul+1, div, cal*num[cnt], n);
+		}
+		if(div<oper[3]) {
+			nPr(cnt+1, plus, minus, mul, div+1, cal/num[cnt], n);
 		}
 	}
 }
