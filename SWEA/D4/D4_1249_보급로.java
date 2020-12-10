@@ -83,7 +83,6 @@ public class D4_1249_보급로 {
 			
 			if(visit[curr.dest]) continue; //해당 정점이 이미 방문 했다면 넘긴다.
 			visit[curr.dest] = true;		//해당 정점을 방문처리 한다.
-			
 			for (Edge k : edge[curr.dest]) { //각 정점에서 연결되어 있는 간선의 최소값 찾기
 				if(!visit[k.dest]) { 	 	 //방문한 점이 아니면
 					distance[k.dest] = Math.min(distance[k.dest], distance[curr.dest]+k.weight);
