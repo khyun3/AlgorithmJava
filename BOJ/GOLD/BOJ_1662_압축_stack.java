@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class BOJ_1662_압축 {
+public class BOJ_1662_압축_stack {
 	public static void main(String[] args)throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
