@@ -18,7 +18,7 @@ public class BOJ_1009_분산처리 {
 			int a = Integer.parseInt(st.nextToken())%10;
 			int b = Integer.parseInt(st.nextToken());
 			
-			sb.append(data[a][(b-1)%data[a].length]).append('\n');
+			sb.append(data[a][(b-1)%data[a].length]).append('\n'); 
 		}
 		System.out.print(sb);
 	}
