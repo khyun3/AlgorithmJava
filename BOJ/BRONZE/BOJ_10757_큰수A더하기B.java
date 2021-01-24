@@ -15,7 +15,7 @@ public class BOJ_10757_큰수A더하기B {
 		
 		char [] atmp = st.nextToken().toCharArray();
 		char [] btmp = st.nextToken().toCharArray();
-		int len = atmp.length > btmp.length ? atmp.length : btmp.length; 
+		int len = Math.max(atmp.length, btmp.length); 
 		
 		a = new char [len];
 		b = new char [len];
