@@ -2,8 +2,7 @@ package SILVER;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 
@@ -31,13 +30,9 @@ public class BOJ_10825_국영수 {
 				else if(this.eng == o.eng) {
 					
 					// 국어 점수와 영어 점수가 같으면 수학 점수가 감소하는 순
-					if(this.math > o.math) {
-						return -1;
-					}
-					else if(this.math == o.math) {
-						// 모든 점수가 같으면 이름 사전 순
-						return this.name.compareTo(o.name);
-					}
+					if(this.math > o.math) {return -1;}
+					// 모든 점수가 같으면 이름 사전 순
+					else if(this.math == o.math) {return this.name.compareTo(o.name);}
 					else {return 1;}
 				}
 				else {return 1;}
@@ -50,21 +45,20 @@ public class BOJ_10825_국영수 {
 		StringTokenizer st = null;
 		int N = Integer.parseInt(br.readLine());
 		
-		LinkedList<Student> slist = new LinkedList<>();
+		//PQ가 빨라서 PQ를 사용함
+		//Collections sort 보다 좀 더 빠름
+		PriorityQueue<Student> pq = new PriorityQueue<>();
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine()," ");
 			
-			slist.add(new Student(
+			pq.add(new Student(
 					st.nextToken(), 
 					Integer.parseInt(st.nextToken()), 
 					Integer.parseInt(st.nextToken()), 
 					Integer.parseInt(st.nextToken())));
 		}
-		Collections.sort(slist);
 		StringBuilder sb = new StringBuilder();
-		for (Student s : slist) {
-			sb.append(s.name).append('\n');
-		}
+		while(!pq.isEmpty()) sb.append(pq.poll().name).append('\n');
 		System.out.print(sb);
 	}
 }
