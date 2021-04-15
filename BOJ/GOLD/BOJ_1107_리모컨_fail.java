@@ -5,66 +5,86 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class BOJ_1107_리모컨_fail {
-	static int M; //이동할 채널, 고장난 버튼 수
-	static boolean [] rmc = new boolean[10];
+	static int M, num[], buttons[], answer; //이동할 채널, 선택한 채널, 선택가능한 버튼
+	static boolean flag, rmc[] = new boolean[10];
 	static char [] N;
 	public static void main(String[] args)throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb1 = new StringBuilder();
-		StringBuilder sb2 = new StringBuilder();
+		StringTokenizer st = null;
+		StringBuilder sb = new StringBuilder();
 		
+		int channel = 100; //초기 채널
 		N = br.readLine().toCharArray();
 		M = Integer.parseInt(br.readLine());
+		num = new int [N.length];
 		
-		//초기 채널 번호
-		int initNumber = 100;
-		for (int i = 0; i < N.length; i++) {
-			sb2.append(N[i]+"");
+		//고장난 버튼의 번호를 받아온다.
+		st = new StringTokenizer(br.readLine(), " ");
+		
+		//고장난 버튼을 표시한다.
+		for (int i = 0; i < M; i++) {
+			rmc[Integer.parseInt(st.nextToken())] = true;
 		}
-		//들어온 번호가 100일 때
-		if(initNumber==Integer.parseInt(sb2.toString())) {
-			System.out.println(0);
+		
+		//누를 수 없는 가장 큰 자리를 구한다.
+		int k = -1;
+		for (char c : N) {
+			if(!rmc[Integer.parseInt(Character.toString(c))]) {
+				num[++k] = c-'0';
+			}
+			else {
+				break;
+			}
+		}
+		
+		for (char c : N) {
+			sb.append(c);
+		}
+		
+		//방문할 수 있는 배열을 따로 뺀다.
+		buttons = new int[10-M];
+		int j = -1;
+		for (int i = 0; i < 10; i++) {
+			if(!rmc[i]) {
+				buttons[++j] = i;
+			}
+		}
+		
+		answer = Math.abs(channel - Integer.parseInt(sb.toString()));
+		//0때문에 자리수가 더 커질 수 있으니 체크 해야 함.
+		int u = 0; //자리 수
+		for (int i = 0; i < num.length; i++) {
+			u += num[i];
+			if(i != num.length-1)u *= 10;
+		}
+		
+		//중복 순열	 
+		//cnt : 지금까지 고른 개수
+		//n : 방문 가능한 버튼 수 
+		//r : 골라야하는 개수
+		solution(k+1, buttons.length, num.length, Integer.parseInt(sb.toString()), Integer.toString(u).length());
+		System.out.println(answer);
+	}
+	
+	
+	static void solution(int cnt, int n, int r, int inputChannel, int u) {
+		
+		if(flag) return;
+		
+		if(r==cnt) {
+			StringBuilder sb = new StringBuilder();
+			for (int i : num) {
+				sb.append(i);
+			}
+//			System.out.println(Math.abs(Integer.parseInt(sb.toString())-inputChannel)+"    "+answer);
+			int tmp = Math.abs(Integer.parseInt(sb.toString())-inputChannel);
+			if(answer <= tmp) {flag = true;}
+			answer = Math.min(answer, tmp+u);
 			return;
 		}
-		//초기 채널과 차이를 본다.
-		int gap =Math.abs(initNumber-Integer.parseInt(sb2.toString()));
-		
-		StringTokenizer st = new StringTokenizer(br.readLine()," ");
-		
-		//고장난 버튼 체크
-		for (int i = 0; i < M; i++) {
-			int cnt = Integer.parseInt(st.nextToken());
-			rmc[cnt] = true;
+		for (int i = 0; i < n; i++) {
+			num[cnt] = buttons[i];
+			solution(cnt+1, n, r, inputChannel, u);
 		}
-		
-		int [] closeNumber = new int[N.length];
-		//N의 각각의 자리마다 가장 가까운 누를 수 있는 번호를 구한다.
-		for (int i = 0; i < N.length; i++) {
-			
-			int number = Integer.parseInt(N[i]+"");//해당 자리의 수
-			int selecter = Integer.MAX_VALUE;	//골라진 번호
-			for (int j = 0; j < 10; j++) {
-				
-				//만약 누를 수 있다면
-				if(!rmc[j]) {
-					//가장 가까운 번호를 구한다
-					if(Math.abs(number-j)<selecter) {
-						selecter = Math.abs(number-j); 
-						closeNumber[i] = j;
-					}
-				}
-			}			 
-		}
-		sb2 = new StringBuilder();
-		for (int i = 0; i < closeNumber.length; i++) {
-			sb1.append(closeNumber[i]);
-			sb2.append(N[i]+"");
-		}
-		int answer = Math.abs(Integer.parseInt(sb2.toString())-Integer.parseInt(sb1.toString()))+closeNumber.length;
-		
-		if(gap > answer)
-			System.out.println(answer);
-		else
-			System.out.println(gap);
 	}
 }
