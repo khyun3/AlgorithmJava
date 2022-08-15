@@ -29,7 +29,7 @@ public class BOJ_10994_별찍기19 {
 		}
 		else {//1,3,5,7,... 2n+1번째 행이면
 			print(false,ktmp+1, n-4, sb); //2n+1행일 때, "* "과 " *"는 1번씩 더 찍히고 중앙에 빈 칸은 n-4칸 찍힘 
-			recursion(k+1, n-4, sb); 
+			recursion(k+1, n-4, sb);
 			print(false, ktmp+1, n-4, sb); //재귀를 탈출 했을 때, 상하 대칭으로 찍히게 하기 위해 한번 더 별을 찍음
 		}
 	}

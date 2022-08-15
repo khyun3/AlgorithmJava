@@ -9,39 +9,39 @@ import java.util.StringTokenizer;
 public class BOJ_2605_줄세우기 {
 
 	static int N;
-	static List<Integer> list = new LinkedList<>();
+	static List<Integer> studentOrder = new LinkedList<>();
 	
 	public static void main(String[] args)throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
+		StringTokenizer drawNumberTokenizer;
 		
 		N = Integer.parseInt(br.readLine());
-		st = new StringTokenizer(br.readLine()," ");
+		drawNumberTokenizer = new StringTokenizer(br.readLine()," ");
 		
 		for (int i = 0; i < N; i++) {
-			int p = Integer.parseInt(st.nextToken());
+			int drawNumber = Integer.parseInt(drawNumberTokenizer.nextToken());
 			//1번이 들어왔을 때
 			if(i==0) {
-				list.add(i+1);
+				studentOrder.add(i+1);
 			}
 			//2번 학생부터
 			else {
 				//뽑은 번호가 0이면 뒤에 붙인다.
-				if(p==0) {
-					list.add(i+1);
+				if(drawNumber==0) {
+					studentOrder.add(i+1);
 				}
 				//뽑은 번호가 0이 아니라면
 				else {
 					//끝 인덱스는 i가 알고 있음.
-					list.add(i-p, i+1);
+					studentOrder.add(i-drawNumber, i+1);
 				}
 			}
 			
 		}
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i<list.size(); i++) {
-			sb.append(list.get(i)).append(" ");
+		StringBuilder lineUp = new StringBuilder();
+		for (int i = 0; i<studentOrder.size(); i++) {
+			lineUp.append(studentOrder.get(i)).append(" ");
 		}
-		System.out.println(sb);
+		System.out.println(lineUp);
 	}
 }
