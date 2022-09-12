@@ -27,11 +27,11 @@ public class BOJ_15654_N과M_5 {
         }
         Arrays.sort(arr);
 
-        solve(N, M, 0, 0);
+        solve(N, M, 0);
         System.out.print(sb);
     }
 
-    private static void solve(int n, int m, int s, int c) {
+    private static void solve(int n, int m, int c) {
         if (c == m) {
             for (int x : pick) {
                 sb.append(x).append(" ");
@@ -44,7 +44,7 @@ public class BOJ_15654_N과M_5 {
             if (check[i]) continue;
             check[i] = true;
             pick[c] = arr[i];
-            solve(n, m, i, c + 1);
+            solve(n, m, c + 1);
             check[i] = false;
         }
     }
