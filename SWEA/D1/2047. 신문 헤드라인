@@ -1,5 +1,0 @@
-		Scanner sc = new Scanner(System.in);
-		String input;
-		input = sc.next();
-		input = input.toUpperCase();
-		System.out.println(input);

@@ -1,3 +1,0 @@
-		Scanner sc = new Scanner(System.in);
-		int a = sc.nextInt();		
-		System.out.println(a*(a+1)/2);
