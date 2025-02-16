@@ -29,11 +29,11 @@ public class BOJ_10811_바구니뒤집기 {
 
     static void reverse(int[] baskets, int i, int j) {
         //i ~ j 까지 역순으로 돌린다.
-        int cnt = (j - i + 1) / 2;
-        for (int k = 0; k < cnt; k++) {
-            int temp = baskets[i + k];
-            baskets[i + k] = baskets[j - k];
-            baskets[j - k] = temp;
+        for (; i <= j; i++) {
+            int temp = baskets[i];
+            baskets[i] = baskets[j];
+            baskets[j] = temp;
+            j--;
         }
     }
 
