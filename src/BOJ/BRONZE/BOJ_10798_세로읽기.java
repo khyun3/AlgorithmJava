@@ -8,23 +8,20 @@ public class BOJ_10798_세로읽기 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        char[][] words = new char[5][15];
+        char[][] words = new char[5][];
+        int maxLen = 1;
         for (int t = 0; t < 5; t++) {
-            String inputLine = br.readLine();
-            for (int c = 0; c < 15; c++) {
-                if (inputLine.length() > c) {
-                    words[t][c] = inputLine.charAt(c);
-                }
-            }
+            words[t] = br.readLine().toCharArray();
+            maxLen = Math.max(maxLen, words[t].length);
         }
-        System.out.print(solution(words));
+        System.out.print(solution(words, maxLen));
     }
 
-    static String solution(char[][] words) {
+    static String solution(char[][] words, int maxLen) {
         StringBuilder sb = new StringBuilder();
-        for (int c = 0; c < 15; c++) {
+        for (int c = 0; c < maxLen; c++) {
             for (int r = 0; r < 5; r++) {
-                if (words[r][c] != '\u0000') { //\u0000 << char 초기 값
+                if (words[r].length > c) {
                     sb.append(words[r][c]);
                 }
             }
