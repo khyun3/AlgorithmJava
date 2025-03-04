@@ -44,11 +44,8 @@ public class BOJ_4948_배르트랑_공준 {
         int last = (int) Math.sqrt(246912) + 1;
         for (int i = 2; i <= last; i++) {
             if (isPrimes[i]) {
-                isPrimes[i] = isPrime(i);
-                int multi = 2;
-                for (int j = i * multi; j <= 246912; j = i * multi) {
+                for (int j = i * i; j <= 246912; j += i) {
                     isPrimes[j] = false;
-                    multi++;
                 }
             }
         }
@@ -59,21 +56,5 @@ public class BOJ_4948_배르트랑_공준 {
             }
         }
         return primes;
-    }
-
-    static boolean isPrime(int num) {
-        if(num == 0 || num == 1) {
-            return false;
-        }
-        if (num == 2 || num == 3) {
-            return true;
-        }
-        int last = (int) Math.sqrt(num) + 1;
-        for (int i = 2; i <= last; i++) {
-            if (num % i == 0) {
-                return false;
-            }
-        }
-        return true;
     }
 }

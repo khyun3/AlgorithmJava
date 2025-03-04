@@ -37,31 +37,11 @@ public class BOJ_1929_소수구하기 {
         int last = (int) Math.sqrt(end) + 1;
         for (int i = 2; i <= last; i++) {
             if (primes[i]) {
-                primes[i] = isPrime(i);
-                int k = 2;
-                for (int j = i * k; j < end; j = i * k) {
+                for (int j = i * i; j < end; j += i) {
                     primes[j] = false;
-                    k++;
                 }
             }
         }
         return primes;
-    }
-
-    static boolean isPrime(int num) {
-        if(num == 0 || num == 1) {
-            return false;
-        }
-        if (num == 2 || num == 3) {
-            return true;
-        }
-
-        int last = (int) Math.sqrt(num) + 1;
-        for (int i = 5; i <= last; i++) {
-            if (num % i == 0) {
-                return false;
-            }
-        }
-        return true;
     }
 }
