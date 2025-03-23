@@ -1,9 +1,6 @@
 package BOJ.BRONZE;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class BOJ_24416_알고리즘수업_피보나치_수1 {
